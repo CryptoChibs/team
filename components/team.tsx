@@ -349,7 +349,7 @@ export const Team = () => {
             <h2 className={`text-2xl font-bold mb-8 text-[#FFC700] text-center tracking-tight ${ibmPlexSans.className}`}>
               Our Core Team
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
               {[
                 { 
                   src: "/James.png", 
@@ -415,14 +415,14 @@ export const Team = () => {
                     className="block"
                   >
                     <motion.div
-                      className="aspect-square rounded-xl border-2 border-[#3A3A80] overflow-hidden relative group cursor-pointer"
+                      className="aspect-square rounded-lg border-2 border-[#3A3A80] overflow-hidden relative group cursor-pointer"
                       whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
                     >
                       <Image
                         src={member.src}
                         alt={member.alt}
-                        width={300}
-                        height={300}
+                        width={240}
+                        height={240}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-6">
@@ -434,14 +434,14 @@ export const Team = () => {
                 ) : (
                   <motion.div
                     key={i}
-                    className="aspect-square rounded-xl border-2 border-[#3A3A80] overflow-hidden relative group"
+                    className="aspect-square rounded-lg border-2 border-[#3A3A80] overflow-hidden relative group"
                     whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
                   >
                     <Image
                       src={member.src}
                       alt={member.alt}
-                      width={300}
-                      height={300}
+                      width={240}
+                      height={240}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-6">
@@ -473,20 +473,32 @@ export const Team = () => {
             >
               <CarouselContent>
                 {[
-                  "MetaMask",
-                  "Lit",
-                  "Pimlico",
-                  "Axie Infinity",
-                  "NBA Top Shot",
-                  "and more",
+                  { src: "/MetaMask.png", alt: "MetaMask" },
+                  { src: "/Lit.png", alt: "Lit" },
+                  { src: "/pimlico.png", alt: "Pimlico" },
+                  { src: "/axie.png", alt: "Axie Infinity" },
+                  { src: "/topshot.png", alt: "NBA Top Shot" },
+                  { text: "and more" }
                 ].map((partner, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
                     <div className="p-1">
                       <motion.div
-                        className="aspect-square bg-gradient-to-br from-[#2A2A60] to-[#3A3A80] rounded-xl flex items-center justify-center p-6 shadow-lg group"
+                        className="aspect-square bg-gradient-to-br from-[#2A2A60] to-[#3A3A80] rounded-xl flex items-center justify-center p-8 shadow-lg group"
                         whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
                       >
-                        <span className="text-[#F5F1E6] text-2xl font-bold text-center transition-colors duration-200 group-hover:text-[#FFC700]">{partner}</span>
+                        {partner.text ? (
+                          <span className="text-[#F5F1E6] text-2xl font-bold text-center transition-colors duration-200 group-hover:text-[#FFC700]">
+                            {partner.text}
+                          </span>
+                        ) : (
+                          <Image
+                            src={partner.src!}
+                            alt={partner.alt!}
+                            width={200}
+                            height={200}
+                            className="object-contain transition-all duration-200 group-hover:scale-110"
+                          />
+                        )}
                       </motion.div>
                     </div>
                   </CarouselItem>
