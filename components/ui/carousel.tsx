@@ -197,16 +197,14 @@ CarouselItem.displayName = "CarouselItem"
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
-    <Button
+    <button
       ref={ref}
-      variant={variant}
-      size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "group absolute bg-[#242457] border border-[#4A4A7E] hover:bg-[#3A3A6E] rounded-full p-3 transition-colors",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -216,26 +214,23 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ArrowLeft className="w-4 h-4 text-[#F5F1E6] group-hover:opacity-70 transition-opacity" />
       <span className="sr-only">Previous slide</span>
-    </Button>
+    </button>
   )
 })
-CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
-    <Button
+    <button
       ref={ref}
-      variant={variant}
-      size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "group absolute bg-[#242457] border border-[#4A4A7E] hover:bg-[#3A3A6E] rounded-full p-3 transition-colors",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -245,12 +240,11 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight className="w-4 h-4 text-[#F5F1E6] group-hover:opacity-70 transition-opacity" />
       <span className="sr-only">Next slide</span>
-    </Button>
+    </button>
   )
 })
-CarouselNext.displayName = "CarouselNext"
 
 export {
   type CarouselApi,

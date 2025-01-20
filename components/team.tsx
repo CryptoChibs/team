@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Space_Mono, IBM_Plex_Sans } from "next/font/google"
+import CipherCountsLogo from "@/public/CipherCounts.png"
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -100,7 +101,7 @@ export const Team = () => {
                   {[
                     { href: "https://collab.land/overview", label: "Overview" },
                     { href: "https://collab.land/team", label: "Team" },
-                    { href: "https://docs.collab.land/dao/token/token_overview", label: "$COLLAB" }
+                    { href: "https://docs.collab.land/help-docs/key-features/token", label: "$COLLAB" }
                   ].map((item) => (
                     <Link 
                       key={item.href}
@@ -478,6 +479,7 @@ export const Team = () => {
                   { src: "/pimlico.png", alt: "Pimlico" },
                   { src: "/axie.png", alt: "Axie Infinity" },
                   { src: "/topshot.png", alt: "NBA Top Shot" },
+                  { src: CipherCountsLogo, alt: "CipherCounts" },
                   { text: "and more" }
                 ].map((partner, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
