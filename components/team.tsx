@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Space_Mono, IBM_Plex_Sans } from "next/font/google"
 import CipherCountsLogo from "@/public/CipherCounts.png"
+import { StaticImageData } from "next/image"
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -27,6 +28,13 @@ const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 })
+
+type Partner = {
+  src?: string | StaticImageData;
+  alt?: string;
+  href?: string;
+  text?: string;
+}
 
 export const Team = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -583,41 +591,64 @@ export const Team = () => {
             <Carousel
               opts={{
                 align: "start",
-                loop: true,
+                loop: false,
+                dragFree: true
               }}
               className="w-full max-w-4xl mx-auto relative"
               setApi={setCarousel}
             >
               <CarouselContent>
-                {[
-                  { src: "/MetaMask.png", alt: "MetaMask" },
-                  { src: "/Lit.png", alt: "Lit" },
-                  { src: "/pimlico.png", alt: "Pimlico" },
-                  { src: "/axie.png", alt: "Axie Infinity" },
-                  { src: "/topshot.png", alt: "NBA Top Shot" },
-                  { src: CipherCountsLogo, alt: "CipherCounts" },
+                {([
+                  { src: "/axie.png", alt: "Axie Infinity", href: "https://axieinfinity.com" },
+                  { src: CipherCountsLogo, alt: "CipherCounts", href: "https://ciphercounts.io/" },
+                  { src: "/Eliza.svg", alt: "ELIZA/AI16z", href: "https://www.elizaos.ai/" },
+                  { src: "/gaia-logo-light.png", alt: "GAIA", href: "https://www.gaianet.ai" },
+                  { src: "/Hedgey.png", alt: "Hedgey Finance", href: "https://hedgey.finance/" },
+                  { src: "/Linea.svg", alt: "Linea", href: "https://linea.build" },
+                  { src: "/Lit.png", alt: "Lit Protocol", href: "https://litprotocol.com" },
+                  { src: "/MetaMask.png", alt: "MetaMask", href: "https://metamask.io" },
+                  { src: "/topshot.png", alt: "NBA Top Shot", href: "https://nbatopshot.com" },
+                  { src: "/nuggets.png", alt: "Nuggets", href: "https://nuggets.life" },
+                  { src: "/pimlico.png", alt: "Pimlico", href: "https://pimlico.io" },
+                  { src: "/PrivadoID.svg", alt: "Privado ID", href: "https://privado.id" },
                   { text: "and more" }
-                ].map((partner, index) => (
+                ] as Partner[]).map((partner, index) => (
                   <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/4 pl-2 sm:pl-3 md:pl-4">
                     <div className="p-1">
-                      <motion.div
-                        className="aspect-square bg-gradient-to-br from-[#2A2A60] to-[#3A3A80] rounded-xl flex items-center justify-center p-4 sm:p-6 md:p-8 shadow-lg group"
-                        whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                      >
-                        {partner.text ? (
+                      {partner.href ? (
+                        <Link href={partner.href} target="_blank" rel="noopener noreferrer">
+                          <motion.div
+                            className="aspect-square bg-gradient-to-br from-[#2A2A60] to-[#3A3A80] rounded-xl flex items-center justify-center p-4 sm:p-6 md:p-8 shadow-lg group cursor-pointer"
+                            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                          >
+                            {partner.text ? (
+                              <span className="text-[#F5F1E6] text-base sm:text-xl md:text-2xl font-bold text-center transition-colors duration-200 group-hover:text-[#FFC700]">
+                                {partner.text}
+                              </span>
+                            ) : (
+                              <Image
+                                src={partner.src!}
+                                alt={partner.alt!}
+                                width={200}
+                                height={200}
+                                className={`
+                                  object-contain w-full h-full transition-all duration-200 group-hover:scale-110
+                                  ${partner.src === CipherCountsLogo ? 'brightness-200' : ''}
+                                `}
+                              />
+                            )}
+                          </motion.div>
+                        </Link>
+                      ) : (
+                        <motion.div
+                          className="aspect-square bg-gradient-to-br from-[#2A2A60] to-[#3A3A80] rounded-xl flex items-center justify-center p-4 sm:p-6 md:p-8 shadow-lg group"
+                          whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                        >
                           <span className="text-[#F5F1E6] text-base sm:text-xl md:text-2xl font-bold text-center transition-colors duration-200 group-hover:text-[#FFC700]">
                             {partner.text}
                           </span>
-                        ) : (
-                          <Image
-                            src={partner.src!}
-                            alt={partner.alt!}
-                            width={200}
-                            height={200}
-                            className="object-contain w-full h-full transition-all duration-200 group-hover:scale-110"
-                          />
-                        )}
-                      </motion.div>
+                        </motion.div>
+                      )}
                     </div>
                   </CarouselItem>
                 ))}
